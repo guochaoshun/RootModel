@@ -17,7 +17,7 @@
         // 方式1 , 简单,但是不能处理嵌套
 //        [self setValuesForKeysWithDictionary:dic];
         // 方式2 ,
-        //得到当前class的所有属性
+        //得到当前class的所有属性,不能获取到父类的属性,是本类的所有属性
         uint count;
         objc_property_t *properties = class_copyPropertyList([self class], &count);
         
