@@ -10,7 +10,7 @@
 
 @interface Person : RootModel
 
-@property (nonatomic,copy) NSString * followYn ;
-@property (nonatomic,copy) NSString * diaryFabulous ;
+@property (nonatomic,copy) NSString * name ;
+@property (nonatomic,copy) NSString * job ;
 
 @end

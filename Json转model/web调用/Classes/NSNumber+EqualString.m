@@ -24,7 +24,7 @@
     //        return [NSString stringWithFormat:@"%.2lf",self.doubleValue];
     //    }
     //    return self.stringValue;
-    NSLog(@"moneyDescription");
+//    NSLog(@"moneyDescription");
     double conversionValue = [self doubleValue];
     NSString *doubleString = [NSString stringWithFormat:@"%lf", conversionValue];
     NSDecimalNumber *decNumber = [NSDecimalNumber decimalNumberWithString:doubleString];

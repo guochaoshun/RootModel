@@ -1,4 +1,3 @@
-
 //
 //  Person.m
 //  web调用
@@ -10,13 +9,5 @@
 #import "Person.h"
 
 @implementation Person
-
-
-- (NSString *)description {
-    NSLog(@"Person  description");
-    return [super description];
-}
-
-
 
 @end

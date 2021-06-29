@@ -19,8 +19,7 @@
         // 方式2 ,
         //得到当前class的所有属性,不能获取到父类的属性,是本类的所有属性
         uint count;
-        objc_property_t *properties = class_copyPropertyList([self class], &count);
-        
+        objc_property_t *properties = gcs_class_copyPropertyList([self class], &count);
         //循环并用KVC得到每个属性的值
         for (int i = 0; i<count; i++) {
             objc_property_t property = properties[i];
@@ -34,7 +33,7 @@
             }
             
             NSString *type = @(property_getAttributes(property));
-            NSLog(@"name = %@  type = %@  value = %@",propertyName,type,value);
+            NSLog(@"name = %@  type = %@  value = <%@:%@>",propertyName,type,[value class],value);
             
             if ([type containsString:@"\""]) {
                 NSString * className = [type componentsSeparatedByString:@"\""][1];
@@ -66,8 +65,6 @@
         
         //释放
         free(properties);
-
-        
     }
     return self;
     
@@ -96,7 +93,7 @@
  
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"<%@: %p> -- %@",[self class],self,[self modelToDictionary]];
+    return [NSString stringWithFormat:@"<%@: %p> -- %@",[self class],self,[self modelToDictionary].description];
 }
 
 /// 把一个RootModel还原成成一个字典 , 主要为了description使用
@@ -107,14 +104,14 @@
     
     //得到当前class的所有属性
     uint count;
-    objc_property_t *properties = class_copyPropertyList([self class], &count);
+    objc_property_t *properties = gcs_class_copyPropertyList([self class], &count);
     
     //循环并用KVC得到每个属性的值
     for (int i = 0; i<count; i++) {
         objc_property_t property = properties[i];
         NSString *name = @(property_getName(property));
         
-        id value = [self valueForKey:name]?:@"nil";//默认值为nil字符串
+        id value = [self valueForKey:name]?:@"nil";//默认值为nil字符串; 或者此处如果为nil,可以不加入到字典中
         // model中嵌套了子model
         if ([value isKindOfClass:[RootModel class]]) {
             RootModel * subModel = value ;
@@ -185,6 +182,56 @@
     return self;
 }
 
+/// 把系统的C语言方法扩展下, 支持获取父类的属性
+//objc_property_t *class_copyPropertyList(Class cls, unsigned int * outCount)
+objc_property_t* gcs_class_copyPropertyList(Class cls, unsigned int * outCount) {
 
+    // 可惜自己C语言内存管理的不了解,下面的做法有点傻,应该有办法通过一次遍历完成的
+    // 1.先统计出来有多少属性,过滤掉了NSObject的属性,因为NSObject中有很多无效的属性,
+    // 2.然后一次性的malloc对应大小的数组,
+    // 3.在遍历一次把objc_property_t加入到数组中
+    /*
+     NSObject中的无效属性举例:
+        hash
+        superclass
+        description
+        debugDescription
+     */
+
+    // 1.只能先统计出来有多少属性,
+    unsigned int allCount = 0;
+    Class tempCls = cls;
+    while (tempCls != [NSObject class]) {
+        uint count;
+        objc_property_t *properties = class_copyPropertyList(tempCls, &count);
+        allCount += count;
+        tempCls = [tempCls superclass];
+        free(properties);
+    }
+
+    // 2.然后一次性的malloc对应大小的数组,
+    objc_property_t *allProperties = malloc(sizeof(objc_property_t) * allCount);
+
+    // 3.在遍历一次把objc_property_t加入到数组中
+    tempCls = cls;
+    int j = 0;
+    while (tempCls != [NSObject class]) {
+        uint count;
+        objc_property_t *properties = class_copyPropertyList(tempCls, &count);
+
+        //循环并用KVC得到每个属性的值
+        for (int i = 0; i<count; i++) {
+            objc_property_t property = properties[i];
+            NSString *propertyName = @(property_getName(property));
+            NSLog(@"属性名字: %@ 对应类: %@",propertyName,tempCls);
+            allProperties[j] = property;
+            j++;
+        }
+        free(properties);
+        tempCls = [tempCls superclass];
+    }
+    *outCount = allCount;
+    return allProperties;
+}
 
 @end

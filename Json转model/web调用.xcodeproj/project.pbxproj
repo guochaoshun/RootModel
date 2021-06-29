@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		18EC0E09223659BC00732C88 /* NSDictionary+JsonLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CBBC0ED21C3550700241ADA /* NSDictionary+JsonLog.m */; };
+		505DEE28268AC46E0094599C /* Teacher.m in Sources */ = {isa = PBXBuildFile; fileRef = 505DEE27268AC46E0094599C /* Teacher.m */; };
 		9C4DFDD6209BF9E40004ED9F /* NSNumber+EqualString.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C4DFDD5209BF9E40004ED9F /* NSNumber+EqualString.m */; };
 		9CBBC0E821C2662200241ADA /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CBBC0E721C2662200241ADA /* Person.m */; };
 		9CBBC0EB21C26A1E00241ADA /* NetWork.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CBBC0EA21C26A1E00241ADA /* NetWork.m */; };
@@ -42,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		505DEE26268AC46E0094599C /* Teacher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Teacher.h; sourceTree = "<group>"; };
+		505DEE27268AC46E0094599C /* Teacher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Teacher.m; sourceTree = "<group>"; };
 		9C4DFDD4209BF9E40004ED9F /* NSNumber+EqualString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSNumber+EqualString.h"; sourceTree = "<group>"; };
 		9C4DFDD5209BF9E40004ED9F /* NSNumber+EqualString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+EqualString.m"; sourceTree = "<group>"; };
 		9CBBC0E621C2662200241ADA /* Person.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
@@ -122,6 +125,8 @@
 				9CD3AE6821DC8DDD009EB5AB /* PageModel.m */,
 				9CBBC0E621C2662200241ADA /* Person.h */,
 				9CBBC0E721C2662200241ADA /* Person.m */,
+				505DEE26268AC46E0094599C /* Teacher.h */,
+				505DEE27268AC46E0094599C /* Teacher.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -318,6 +323,7 @@
 				9CF9F019208AF4EA00FFD2CB /* ViewController.m in Sources */,
 				9CF9F024208AF50300FFD2CB /* main.m in Sources */,
 				9CD3AE6321DC8D26009EB5AB /* RootModel.m in Sources */,
+				505DEE28268AC46E0094599C /* Teacher.m in Sources */,
 				9CBBC0E821C2662200241ADA /* Person.m in Sources */,
 				9CF9F016208AF4EA00FFD2CB /* AppDelegate.m in Sources */,
 				9CD3AE6921DC8DDD009EB5AB /* PageModel.m in Sources */,
