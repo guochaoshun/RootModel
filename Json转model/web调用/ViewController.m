@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self test1];
+    [self test2];
 
 }
 
@@ -31,14 +31,14 @@
 - (void)test1 {
 
     NSDictionary *responseDic = @{@"resultCode":@(200),
-                               @"resultMsg":@"请求成功",
-                               @"success":@(YES),
-                               @"teacher":@{@"school":@"高中",
-                                            @"subject":@"数学",
-                                            @"schoolId":@(1000),
-                                            @"name":@"王XX",
-                                            @"job":@"老师",
-                               },
+                                  @"resultMsg":@"请求成功",
+                                  @"success":@(YES),
+                                  @"teacher":@{@"school":@"高中",
+                                               @"subject":@"数学",
+                                               @"schoolId":@(1000),
+                                               @"name":@"王XX",
+                                               @"job":@"老师",
+                                  },
     };
     Response *responseModel = [[Response alloc] initWithDic:responseDic];
     NSLog(@"%@",responseModel);
@@ -53,16 +53,17 @@
 - (void)test2 {
     NSDictionary *response = @{@"resultCode":@(200),
                                @"resultMsg":@"请求成功",
-                               @"resultInfo":@[@{
-                                                   @"name":@"用户1",
-                                                   @"job":@"卖萌",
-                               },@{
-                                                   @"name":@"用户2",
-                                                   @"job":@"卖苹果",
-                               },@{
-                                                   @"name":@"用户1",
-                                                   @"job":@"卖香蕉",
-                               },
+                               @"resultInfo":@[
+                                       @{
+                                           @"name":@"用户1",
+                                           @"job":@"卖萌",
+                                       },@{
+                                           @"name":@"用户2",
+                                           @"job":@"卖苹果",
+                                       },@{
+                                           @"name":@"用户1",
+                                           @"job":@"卖香蕉",
+                                       },
                                ],
     };
     Response *respone = [[Response alloc] initWithDic:response];
@@ -101,7 +102,7 @@
     network.urlString = @"http://qz.test.internet.zhiwangyilian.com/api/client-community/client/community/hot/hotList";
     network.parameters = @{@"pageIndex":@"0",
                            @"pageSize":@"2",
-                           };
+    };
     network.success = ^(NSDictionary * data) {
         
         Response * re = [[Response alloc] initWithDic:data];
