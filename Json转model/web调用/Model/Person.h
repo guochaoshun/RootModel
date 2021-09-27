@@ -12,5 +12,7 @@
 
 @property (nonatomic,copy) NSString * name ;
 @property (nonatomic,copy) NSString * job ;
+@property (nonatomic,copy) NSString * city ;
+
 
 @end

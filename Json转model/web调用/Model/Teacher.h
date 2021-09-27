@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *school;
 @property (nonatomic, copy) NSString *subject;
 @property (nonatomic, assign) NSInteger schoolId;
+@property (nonatomic, copy) NSString *title;
+
 
 @end
 

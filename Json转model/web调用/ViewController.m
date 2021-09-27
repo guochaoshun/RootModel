@@ -22,8 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self test2];
-
+//    [self test2];
+    [self test3];
 }
 
 
@@ -38,6 +38,8 @@
                                                @"schoolId":@(1000),
                                                @"name":@"王XX",
                                                @"job":@"老师",
+                                               @"titlee":@"副教授",
+                                               @"cityy":@"北京",
                                   },
     };
     Response *responseModel = [[Response alloc] initWithDic:responseDic];
@@ -81,6 +83,8 @@
                            @"schoolId":@(1000),
                            @"name":@"王XX",
                            @"job":@"老师",
+                           @"titlee":@"副教授",
+                           @"cityy":@"北京",
     };
     Teacher *teacher = [[Teacher alloc] initWithDic:dic];
     NSLog(@"%@",teacher);

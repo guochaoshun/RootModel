@@ -27,7 +27,8 @@
             id value = [dic valueForKey:propertyName];
 
             // 处理value , 如果propertyNameToJsonKey有值,
-            NSString * jsonKey  = [[self class]propertyNameToJsonKey][propertyName] ;
+            NSDictionary *nameToJsonDic = [self p_allPropertyNameToJsonKey];
+            NSString * jsonKey  = nameToJsonDic[propertyName] ;
             if (jsonKey != nil) {
                 value = [dic valueForKey:jsonKey];
             }
@@ -89,6 +90,19 @@
 }
 - (void)setNilValueForKey:(NSString *)key {
     NSLog(@"%s  key = %@ value = nil",__func__,  key);
+}
+
+/// 获取从当前类开始的到基类的propertyNameToJsonKey实现
+- (NSDictionary *)p_allPropertyNameToJsonKey {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    Class cls = [self class];
+    while (cls) {
+        if ([cls respondsToSelector:@selector(propertyNameToJsonKey)]) {
+            [dic addEntriesFromDictionary:[cls propertyNameToJsonKey]];
+        }
+        cls = [cls superclass];
+    }
+    return [dic copy];
 }
  
 

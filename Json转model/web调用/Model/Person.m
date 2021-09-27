@@ -10,4 +10,11 @@
 
 @implementation Person
 
+// key为属性名,  value为服务器名字
++ (NSDictionary *)propertyNameToJsonKey{
+    return @{
+             @"city":@"cityy"
+             };
+}
+
 @end
